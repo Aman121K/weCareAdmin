@@ -1,0 +1,74 @@
+/* Dashboard.css */
+
+.col.main {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-top:60px;
+  }
+  
+  .breadcrumb {
+    background-color: #57b960;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0.4, 0.4); 
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .card.bg-success {
+    background-color: #57b960;
+  }
+  
+  .card.bg-danger {
+    background-color: #dc3545;
+  }
+  
+  .card.bg-info {
+    background-color: #17a2b8;
+  }
+  
+  .card.bg-warning {
+    background-color: #ffc107;
+  }
+  
+  .table-responsive {
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+  }
+  
+  .table .thead-light th {
+    background-color: #f8f9fa;
+  }
+  

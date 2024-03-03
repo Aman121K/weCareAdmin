@@ -1,0 +1,60 @@
+
+.add-user-container {
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    width:100vh;
+    height:100%;
+    margin-top:100px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input {
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius:12px;
+    transition: background-color 0.3s ease; /* Add transition for smooth effect */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Change the background color on hover */
+  }
+  
+  
+  /* Popup styling */
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive styling for small screens */
+  @media screen and (max-width: 600px) {
+    .add-user-container {
+      max-width: 100%;
+    }
+  }
+  

@@ -1,15 +1,8 @@
-// import React from 'react';
-// const SubAdmin=()=>{
-//     return(
-//         <div>
-//             this is SubAdmin Page
-//         </div>
-//     )
-// }
-// export default SubAdmin;
-
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Container, Table, Pagination } from 'react-bootstrap';
+import './style.css'
+
 const Subadmin = () => {
     const [activePage, setActivePage] = useState(1);
     const [records, setRecords] = useState([
@@ -50,35 +43,41 @@ const Subadmin = () => {
 
     return (
         <>
-            <Container className="container mt-6 mt-10">
-                <h4 style={{marginTop:'50px'}}> Agents Orders  Records List</h4>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Sr.No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>GST</th>
-                            <th>Total Earning</th>
-                            {/* Add more table headings as needed */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentRecords.map((record, index) => (
-                            <tr key={record.id}>
-                                <td>{startIndex + index + 1}</td>
-                                <td>{record.name}</td>
-                                <td>{record.email}</td>
-                                <td>{record.mobile}</td>
-                                <td>{record.gst}</td>
-                                <td>Rs.{record.totalEarning}</td>
-                                {/* Add more table cells for additional record properties */}
+            <Container fluid className="mt-6 mt-10">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mt-5">
+                    <h4>Agents Orders Records List</h4>
+                    <NavLink to='/adduser' className='glow-on-hover btn btn-primary my-3 my-md-0'>
+                        Add User
+                    </NavLink>
+                </div>
+
+                <div className="table-responsive">
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>GST</th>
+                                <th>Total Earning</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <Pagination>
+                        </thead>
+                        <tbody>
+                            {currentRecords.map((record, index) => (
+                                <tr key={record.id}>
+                                    <td>{startIndex + index + 1}</td>
+                                    <td>{record.name}</td>
+                                    <td>{record.email}</td>
+                                    <td>{record.mobile}</td>
+                                    <td>{record.gst}</td>
+                                    <td>Rs.{record.totalEarning}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+                <Pagination className="justify-content-center">
                     {Array.from({ length: totalPages }, (_, i) => (
                         <Pagination.Item key={i + 1} active={i + 1 === activePage} onClick={() => handleClick(i + 1)}>
                             {i + 1}

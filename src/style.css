@@ -1,0 +1,151 @@
+/* Reports.css */
+
+.container {
+    margin-top: 20px;
+    display: flex;
+  }
+  
+  .table-responsive {
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  thead {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  td, th {
+    padding: 12px;
+  }
+  
+  .Pagination {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .table-responsive {
+      overflow-x: auto;
+    }
+  }
+  
+  
+  .container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .table:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .Pagination {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Pagination .page-link {
+    color: #007bff;
+  }
+  
+  .Pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .Pagination .page-link:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+
+
+  /* Sidebar.css */
+
+#sidebar {
+  background-color: #e9ecef;
+  height:100%;
+
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  color: #343a40;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.sidebar-logo:hover {
+  text-decoration: none;
+  color: #007bff;
+}
+
+/* @media (max-width: 991px) {
+  #sidebar {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  } */
+
+  .nav-link {
+    color: #495057;
+  }
+
+  .nav-link:hover {
+    color: #007bff;
+    background-color: transparent;
+  }
+
+  .sidebar-logo {
+    color: #007bff;
+  }
+/* } */
+
+@media (max-width: 575px) {
+  .nav.flex-column.sticky-top {
+    padding: 15px;
+  }
+
+  #sidebar {
+    background-color: #e9ecef;
+    height: 100%;
+  
+  }
+}
