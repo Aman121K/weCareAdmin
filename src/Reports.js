@@ -51,13 +51,13 @@ const Reports = () => {
 
     return (
         <>
-            <Container fluid className="mt-6 mt-10">
-                <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mt-5">
+            <Container className="contain">
+                <div className="content">
                     <h4>Agents Orders Records List</h4>
                 </div>
 
                 <div className="table-responsive">
-                    <Table striped bordered hover>
+                    <Table >
                         <thead>
                             <tr>
                                 <th>Sr.No</th>
@@ -82,7 +82,7 @@ const Reports = () => {
                         </tbody>
                     </Table>
                 </div>
-                <Pagination className="justify-content-center">
+                <Pagination className="page">
                     {Array.from({ length: totalPages }, (_, i) => (
                         <Pagination.Item key={i + 1} active={i + 1 === activePage} onClick={() => handleClick(i + 1)}>
                             {i + 1}

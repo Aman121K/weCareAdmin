@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './Dashboard.css'; 
+import './Dashboard.css';
 
 const Dashboard = () => {
 
@@ -14,6 +14,7 @@ const Dashboard = () => {
     },)
 
     return (
+        <>
         <div className="col main ">
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
@@ -169,6 +170,7 @@ const Dashboard = () => {
             <hr />
 
         </div>
+        </>
     )
 }
 export default Dashboard
