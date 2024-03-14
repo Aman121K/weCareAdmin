@@ -105,7 +105,7 @@ const AddUser = () => {
 
       {showPopup && (
         <div className="popup">
-          <p>{`User Added - Type: ${apiData?.type}, Email: ${apiData?.email}, Password: ${apiData?.password}`}</p>
+          <p>{`User Added -  Email: ${apiData?.email}`}</p>
           <button onClick={closePopup}>Close</button>
         </div>
       )}
