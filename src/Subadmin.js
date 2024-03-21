@@ -11,7 +11,7 @@ const Subadmin = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch("http://localhost:6002/users");
+                const response = await fetch("https://api.wecare.ind.in/users");
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

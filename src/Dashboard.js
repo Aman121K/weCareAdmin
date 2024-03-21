@@ -8,7 +8,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchOverviewData = async () => {
             try {
-                const response = await fetch("http://localhost:6002/overview-data");
+                const response = await fetch("https://api.wecare.ind.in/overview-data");
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

@@ -1,31 +1,3 @@
-// const [data, setData] = useState([]);
-
-//     useEffect(() => {
-//         const getAllUsersData = async () => {
-//             try {
-//                 const response = await fetch("http://107.22.72.28:6002/user");
-
-//                 if (!response.ok) {
-//                     throw new Error(`HTTP error! Status: ${response.status}`);
-//                 }
-
-//                 const jsonResponse = await response.json();
-//                 if (jsonResponse.success && Array.isArray(jsonResponse.data)) {
-//                     setData(jsonResponse.data);
-//                     console.log(jsonResponse.data)
-//                 } else {
-//                     console.error("Unexpected JSON structure: ", jsonResponse);
-//                 }
-//             } catch (error) {
-//                 console.error("Error fetching user data:", error);
-//             }
-//         };
-
-//         getAllUsersData();
-//     }, []);
-
-
-
 
 import React, { useEffect, useState } from 'react';
 // import { NavLink } from 'react-router-dom';
@@ -43,7 +15,7 @@ const Reports = () => {
     useEffect(() => {
         const getAllUsersData = async () => {
             try {
-                const response = await fetch("http://107.22.72.28:6002/show-all-leads");
+                const response = await fetch("https://api.wecare.ind.in/show-all-leads");
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -114,7 +86,7 @@ const Reports = () => {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        {Array.isArray(users) && users.length > 0 ? (
+                        {Array.isArray(users.reverse()) && users.length > 0 ? (
                             <tbody>
                                 {currentRecords.map((record, index) => (
                                     <tr key={record._id}>
