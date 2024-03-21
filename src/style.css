@@ -41,6 +41,44 @@ h4 {
   overflow-x: auto;
 }
 
+/* Table styles */
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+/* Modal styles */
+.modal-dialog {
+    max-width: 800px;
+}
+
+/* Add hover effect on table rows */
+.table tbody tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+/* Add border and padding to table cells */
+.table td,
+.table th {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+}
+
+/* Add border-radius to modal header */
+.modal-header {
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+/* Add border-radius to modal body */
+.modal-body {
+    border-radius: 0 0 5px 5px;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
