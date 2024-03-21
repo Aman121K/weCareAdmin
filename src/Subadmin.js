@@ -6,17 +6,18 @@ import './style.css';
 const Subadmin = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(10); 
+    const [usersPerPage] = useState(10);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch("https://api.wecare.ind.in/users");
+                const response = await fetch("https://api.wecare.ind.in/all-sub-admins-data");
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const usersData = await response.json();
-                setUsers(usersData.reverse());
+                console.log("user data", usersData);
+                setUsers(usersData.data.reverse());
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -47,20 +48,22 @@ const Subadmin = () => {
                         <th>Sr No.</th>
                         <th>Email</th>
                         {/* <th>Password</th> */}
-                        <th>Type</th>
+                        <th>Earnings</th>
                         <th>Added Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {currentUsers.map((user, index) => (
-                        <tr key={user._id}>
-                            <td>{indexOfFirstUser + index + 1}</td>
-                            <td>{user.email}</td>
-                            {/* <td>{user.password}</td> */}
-                            <td>{user.type}</td>
-                            <td>{new Date(user.added_date).toLocaleString()}</td>
-                        </tr>
-                    ))}
+                    {currentUsers.map((user, index) => {
+                        console.log("user>>>", user); return (
+                            <tr key={user._id}>
+                                <td>{indexOfFirstUser + index + 1}</td>
+                                <td>{user?.agent?.email}</td>
+                                {/* <td>{user.password}</td> */}
+                                <td>{user?.totalPrice}</td>
+                                <td>{new Date(user?.agent?.added_date).toLocaleString()}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </Table>
             <Pagination>
