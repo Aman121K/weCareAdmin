@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./AddUser.css";
+import { useNavigate } from "react-router-dom";
+
 
 const AddUser = () => {
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,7 +17,7 @@ const AddUser = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://107.22.72.28:6002/all-sub-admins-data');
+        const response = await fetch('https://api.wecare.ind.in/all-sub-admins-data');
         if (response.ok) {
           const data = await response.json();
           setApiData(data);
@@ -41,7 +44,7 @@ const AddUser = () => {
     e.preventDefault();
     console.log("Form data is>", formData)
     try {
-      const response = await fetch('http://107.22.72.28:6002/add-user', {
+      const response = await fetch('https://api.wecare.ind.in/add-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +67,9 @@ const AddUser = () => {
 
   const closePopup = () => {
     setShowPopup(false);
-    setApiData(null);
+    // setApiData(null);
+    navigate('/subadmin')
+    
   };
 
   return (
@@ -105,7 +110,7 @@ const AddUser = () => {
 
       {showPopup && (
         <div className="popup">
-          <p>{`User Added -  Email: ${apiData?.email}`}</p>
+          <p>{`User Added -  Email: ${formData?.email}`}</p>
           <button onClick={closePopup}>Close</button>
         </div>
       )}

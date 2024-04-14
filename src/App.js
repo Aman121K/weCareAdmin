@@ -13,8 +13,6 @@ function App() {
       <div class="container-fluid" id="main">
         <div class="row row-offcanvas row-offcanvas-left">
           <Sidebar />
-          {/* <Dashboard/>
-                   */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/subadmin" element={<SubAdmin />} />
