@@ -1,16 +1,16 @@
-
-import React, { useEffect, useState } from 'react';
-// import { NavLink } from 'react-router-dom';
-import { Container, Table, Pagination, Modal, Button } from 'react-bootstrap';
-import './style.css';
-
-
-
+import React, { useEffect, useState, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import './Reports.css'; // Import your CSS file for custom styling
+// import '~primeicons/primeicons.css';
 const Reports = () => {
+    const dt = useRef(null);
     const [users, setUsers] = useState([]);
-    const [activePage, setActivePage] = useState(1);
     const [selectedImage, setSelectedImage] = useState(null);
-    const itemsPerPage = 10;
+    const [globalFilter, setGlobalFilter] = useState('');
 
     useEffect(() => {
         const getAllUsersData = async () => {
@@ -35,106 +35,48 @@ const Reports = () => {
         getAllUsersData();
     }, []);
 
-    const totalPages = Math.ceil(users.length / itemsPerPage);
-    const startIndex = (activePage - 1) * itemsPerPage;
-    const endIndex = activePage * itemsPerPage;
-    const currentRecords = users.slice(startIndex, endIndex);
-
-    const handleClick = (pageNumber) => {
-        setActivePage(pageNumber);
+    const exportCSV = () => {
+        dt.current.exportCSV();
     };
 
-    const handleImageClick = (image) => {
-        setSelectedImage(image);
+    const imageBodyTemplate = (rowData) => {
+        return (
+            <img src={rowData.device_images} alt="Device" className="device-image" onClick={() => setSelectedImage(rowData.device_images)} />
+        );
     };
 
-    const handleCloseModal = () => {
+    const onHide = () => {
         setSelectedImage(null);
     };
 
-    const renderImages = (images) => {
-        if (Array.isArray(images)) {
-            return images.map((image, index) => (
-                <img key={index} src={image} alt="Device" style={{ width: '50px', height: '50px', cursor: 'pointer' }} onClick={() => handleImageClick(image)} />
-            ));
-        } else {
-            return null;
-        }
-    };
-    
-
     return (
-        <>
-            <Container className="contain">
-                <div className="content">
-                    <h4>Agents Orders Records List</h4>
-                   
-                </div>
-                <div className="table-responsive">
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Email</th>
-                                <th>Phone No.</th>
-                                <th>Name</th>
-                                <th>Warranty Status</th>
-                                <th>Device Brand</th>
-                                <th>Device Emi Number</th>
-                                <th>Device Images</th>
-                                <th>Product Value</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        {Array.isArray(users.reverse()) && users.length > 0 ? (
-                            <tbody>
-                                {currentRecords.map((record, index) => (
-                                    <tr key={record._id}>
-                                        <td>{startIndex + index + 1}</td>
-                                        <td>{record.email}</td>
-                                        <td>{record.phone_number}</td>
-                                        <td>{record.contact_name}</td>
-                                        <td>{record.warranty_status}</td>
-                                        <td>{record.device_brand}</td>
-                                        <td>{record.device_emi_number}</td>
-                                        <td className='image'>{renderImages(record.device_images)}</td>
-                                        <td>{record.product_value}</td>
-                                        <td>{record.price}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        ) : (
-                            <tbody>
-                                <tr>
-                                    <td colSpan="9">Loading...</td>
-                                </tr>
-                            </tbody>
-                        )}
-                    </Table>
-                </div>
-                <Pagination className="page">
-                    {Array.from({ length: totalPages }, (_, i) => (
-                        <Pagination.Item key={i + 1} active={i + 1 === activePage} onClick={() => handleClick(i + 1)}>
-                            {i + 1}
-                        </Pagination.Item>
-                    ))}
-                </Pagination>
-            </Container>
-            <Modal show={!!selectedImage} onHide={handleCloseModal}>
-            <Modal.Header >
-    <Modal.Title>Device Image</Modal.Title>
-    
-</Modal.Header>
-                <Modal.Body>
-                    {selectedImage && <img src={selectedImage} alt="Selected Device" style={{ width: '100%', height: 'auto' }} />}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+        <div style={{ marginTop: '50px' }} className="datatable-container">
+            <div className="toolbar">
+                <InputText
+                    type="search"
+                    value={globalFilter}
+                    onChange={(e) => setGlobalFilter(e.target.value)}
+                    placeholder="Search"
+                    className="search-input"
+                />
+                <Button onClick={exportCSV} icon="pi pi-download" className="download-button" />
+            </div>
+            <DataTable ref={dt} value={users} paginator={true} rows={10} rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                globalFilter={globalFilter} className="data-table">
+                <Column field="email" header="Email" sortable={true} />
+                <Column field="phone_number" header="Phone" sortable={true} />
+                <Column field="contact_name" header="Name" sortable={true} />
+                <Column field="warranty_status" header="Warranty Status" sortable={true} />
+                <Column field="device_brand" header="Device Brand" sortable={true} />
+                <Column field="device_emi_number" header="Device EMI Number" sortable={true} />
+                <Column field="product_value" header="Device Price" sortable={true} />
+                <Column field="price" header="Price" sortable={true} />
+                <Column body={imageBodyTemplate} header="Device Images" />
+            </DataTable>
+            <Dialog header="Device Image" visible={!!selectedImage} onHide={onHide} modal className="device-image-dialog">
+                {selectedImage && <img src={selectedImage} alt="Selected Device" className="device-image-full" />}
+            </Dialog>
+        </div>
     );
 };
 

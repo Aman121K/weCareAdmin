@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Table, Pagination } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import './style.css';
-
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 const Subadmin = () => {
+    const dt = useRef(null);
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(10);
-
+    const [globalFilter, setGlobalFilter] = useState('');
+    const exportCSV = () => {
+        dt.current.exportCSV();
+    };
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -16,7 +23,7 @@ const Subadmin = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const usersData = await response.json();
-                console.log("user data", usersData);
+                console.log("user data", usersData.data);
                 setUsers(usersData.data.reverse());
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -26,13 +33,6 @@ const Subadmin = () => {
         fetchUsers();
     }, []);
 
-    // Get current users
-    const indexOfLastUser = currentPage * usersPerPage;
-    const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-    // Change page
-    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
         <Container className="contain">
@@ -42,39 +42,29 @@ const Subadmin = () => {
                     Add User
                 </NavLink>
             </div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Sr No.</th>
-                        <th>Email</th>
-                        {/* <th>Password</th> */}
-                        <th>Earnings</th>
-                        <th>Added Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {currentUsers.map((user, index) => {
-                        console.log("user>>>", user); return (
-                            <tr key={user._id}>
-                                <td>{indexOfFirstUser + index + 1}</td>
-                                <td>{user?.agent?.email}</td>
-                                {/* <td>{user.password}</td> */}
-                                <td>{user?.totalPrice}</td>
-                                <td>{new Date(user?.agent?.added_date).toLocaleString()}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </Table>
-            <Pagination>
-                <Pagination.Prev onClick={() => setCurrentPage(currentPage === 1 ? 1 : currentPage - 1)} />
-                {[...Array(Math.ceil(users.length / usersPerPage)).keys()].map(number => (
-                    <Pagination.Item key={number + 1} active={number + 1 === currentPage} onClick={() => paginate(number + 1)}>
-                        {number + 1}
-                    </Pagination.Item>
-                ))}
-                <Pagination.Next onClick={() => setCurrentPage(currentPage === Math.ceil(users.length / usersPerPage) ? currentPage : currentPage + 1)} />
-            </Pagination>
+            <div style={{ marginTop: '50px' }} className="datatable-container">
+                <div className="toolbar">
+                    <InputText
+                        type="search"
+                        value={globalFilter}
+                        onChange={(e) => setGlobalFilter(e.target.value)}
+                        placeholder="Search"
+                        className="search-input"
+                    />
+                    <Button onClick={exportCSV} icon="pi pi-download" className="download-button" />
+                </div>
+                <DataTable ref={dt} value={users} paginator={true} rows={10} rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                    globalFilter={globalFilter} className="data-table">
+                    <Column field="agent.Owner_name" header="Name" sortable={true} />
+                    <Column field="agent.email" header="email" sortable={true} />
+                    <Column field="totalPrice" header="Total Earning" sortable={true} />
+                    <Column field="agent.Pan" header="Created date" sortable={true} />
+                    <Column field="agent.mobile_no" header="Mobile No." sortable={true} />
+                    <Column field="agent.Aadhar" header="Adhar Card" sortable={true} />
+                    <Column field="agent.Account_no" header="Account Number" sortable={true} />
+                </DataTable>
+              
+            </div>
         </Container>
     );
 };
