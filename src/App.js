@@ -10,6 +10,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import LoginPage from './login';
 function App() {
   return (
     <div>
@@ -18,7 +19,8 @@ function App() {
         <div class="row row-offcanvas row-offcanvas-left">
           <Sidebar/>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<LoginPage />} />
+              <Route path="/dash" element={<Dashboard />} />
               <Route path="/subadmin" element={<SubAdmin />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/adduser" element={<AddUser />} />
