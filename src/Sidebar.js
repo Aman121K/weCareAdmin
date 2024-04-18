@@ -7,7 +7,7 @@ const Sidebar = () => {
         <div className="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" >
             <ul className="nav flex-column sticky-top pl-0 pt-5 p-3 mt-3 ">
                 <li className="nav-item mb-2 mt-3"><a className="nav-link text-secondary" href="#"><h5>We care</h5></a></li>
-                <Link to="/">
+                <Link to="/dash">
                     <li className="nav-item mb-2 "><a className="nav-link text-secondary" href="#"><i className="fas fa-home font-weight-bold"></i> <span className="ml-3">Overview</span></a></li>
                 </Link>
                 <Link to="/subadmin">
@@ -21,6 +21,9 @@ const Sidebar = () => {
                 </Link>
                 <Link to="/reports">
                     <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="far fa-chart-bar font-weight-bold"></i> <span className="ml-3">Analytics</span></a></li>
+                </Link>
+                <Link to="/">
+                    <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="far fa-chart-bar font-weight-bold"></i> <span className="ml-3">Signout</span></a></li>
                 </Link>
                 {/* <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="fas fa-file-export font-weight-bold"></i><span className="ml-3">Export</span></a></li>
                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="fas fa-tablet-alt font-weight-bold"></i><span className="ml-3">Snippets</span></a></li>
