@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AddUser.css";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "./apis";
 
 
 const AddUser = () => {
@@ -17,7 +18,7 @@ const AddUser = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.wecare.ind.in/all-sub-admins-data');
+        const response = await fetch(`${BASE_URL}/all-sub-admins-data`);
         if (response.ok) {
           const data = await response.json();
           setApiData(data);
@@ -44,7 +45,7 @@ const AddUser = () => {
     e.preventDefault();
     console.log("Form data is>", formData)
     try {
-      const response = await fetch('https://api.wecare.ind.in/add-user', {
+      const response = await fetch(`${BASE_URL}/add-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

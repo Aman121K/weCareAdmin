@@ -6,6 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { BASE_URL } from './apis';
 const Subadmin = () => {
     const dt = useRef(null);
     const [users, setUsers] = useState([]);
@@ -18,7 +19,7 @@ const Subadmin = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch("https://api.wecare.ind.in/all-sub-admins-data");
+                const response = await fetch(`${BASE_URL}/all-sub-admins-data`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

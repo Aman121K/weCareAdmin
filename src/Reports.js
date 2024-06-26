@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import './Reports.css'; // Import your CSS file for custom styling
+import { BASE_URL } from './apis';
 // import '~primeicons/primeicons.css';
 const Reports = () => {
     const dt = useRef(null);
@@ -15,7 +16,7 @@ const Reports = () => {
     useEffect(() => {
         const getAllUsersData = async () => {
             try {
-                const response = await fetch("https://api.wecare.ind.in/show-all-leads");
+                const response = await fetch(`${BASE_URL}/show-all-leads`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

@@ -1,0 +1,1 @@
+export const BASE_URL='https://wecare-admin-backend-production.up.railway.app';

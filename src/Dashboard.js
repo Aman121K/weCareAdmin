@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 // import OverviewTable from './OverviewTable';
 import './Dashboard.css';
+import { BASE_URL } from './apis';
 
 const Dashboard = () => {
     const [overviewData, setOverviewData] = useState(null);
@@ -8,7 +9,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchOverviewData = async () => {
             try {
-                const response = await fetch("https://api.wecare.ind.in/overview-data");
+                const response = await fetch(`${BASE_URL}/overview-data`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
